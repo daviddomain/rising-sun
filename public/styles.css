@@ -2,6 +2,6 @@ body {
   display: grid;
   place-items: center;
   font-family: Arial, sans-serif;
-  background-color: #f2f3f7;
-  margin: 0;
+  background-color: #cabf98;
+  margin: 50vh 0 0 0;
 }

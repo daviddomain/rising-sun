@@ -1,0 +1,143 @@
+export const style = /* CSS */ `
+      <style>
+				:host {
+					display: grid;
+					grid-template-columns: [container-start] 1fr [container-end];
+					grid-template-rows: [sun-start] 1fr [horizon-start] 10px [reflection-start] 1fr [reflection-end];
+					place-items: center;
+					width: 300px;
+					aspect-ratio: 1;
+				}
+				:host > div {
+					min-width: 100%;p
+					min-height: 100%;
+				}
+				#background {
+					grid-column: container-start / container-end;
+					grid-row: horizon-start / reflection-end;
+					background-color: #cabf98;
+					z-index: 2;
+				}
+				#sun {
+					grid-column: container-start / container-end;
+					grid-row: sun-start / horizon-start;
+					background: #ff6160;
+					background: radial-gradient(
+						circle at var(--sun-gradient-x) var(--sun-gradient-y),
+						#ffff80 0%,
+						#ff6160 100%
+					);
+					border-radius: 9rem 9rem 0 0;
+					transform-origin: center bottom;
+					transform: translateY(50%);
+					z-index: 1;
+				}
+				#horizon {
+          opacity: 0;
+					width: 0;
+          min-width: initial;
+					grid-column: container-start / container-end;
+					grid-row: horizon-start / reflection-start;
+					z-index: 2;
+				}
+				#horizon::before {
+					content: '';
+					display: block;
+					border-top: 0.01rem solid #e2e2e2;
+				}
+				#horizon::after {
+					content: '';
+					display: block;
+					height: 0.01rem;
+					box-shadow: 0 8px 10px 0px #ff6160;
+				}
+				#reflection {
+					opacity: 0;
+					grid-column: container-start / container-end;
+					grid-row: reflection-start / reflection-end;
+					background: #ff6160;
+					background: radial-gradient(
+						circle at bottom,
+						#ffff80 0%,
+						#ff6160 60%
+					);
+					transform-origin: center top;
+					border-radius: 0 0 10rem 10rem;
+					filter: blur(2.25rem);
+					zoom: 0.95;
+					z-index: 2;
+				}
+				#reflection::before {
+					content: '';
+					background: #ffffff;
+				}
+				
+				#sun {
+					animation: riseY 3s ease-out forwards,
+						gradientYMove 1.5s ease-out forwards,
+						gradientXMove 2s ease-in forwards;
+				}
+
+        #horizon {
+          animation: horizonWidth 2.25s ease-out forwards, reveal 1.5s ease-in 0.5s forwards;
+        }
+
+				#reflection {
+					animation: riseY 0.9s ease-out forwards, scaleUp 2.1s ease-out forwards, reveal 1.5s ease-in 0.5s forwards;
+				}
+        
+        				@keyframes riseY {
+					from {
+						transform: translateY(100%);
+					}
+					to {
+						transform: translateY(0);
+					}
+				}
+
+				@keyframes scaleUp {
+					from {
+						transform: scale(0);
+					}
+					to {
+						transform: scale(1);
+					}
+				}
+
+				@keyframes reveal {
+					from {
+						opacity: 0;
+					}
+					to {
+						opacity: 1;
+					}
+				}
+
+				@keyframes gradientYMove {
+					from {
+						--sun-gradient-y: 200%;
+					}
+					to {
+						--sun-gradient-y: 0%;
+					}
+				}
+
+				@keyframes gradientXMove {
+					0% {
+						--sun-gradient-x: 5%;
+					}
+					100% {
+						--sun-gradient-x: 50%;
+					}
+				}
+
+        @keyframes horizonWidth {
+          from {
+            width: 0;
+          }
+          to {
+            width: 130%;
+          }
+        }
+      </style>
+     `;
