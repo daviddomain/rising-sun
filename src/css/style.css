@@ -1,5 +1,8 @@
 :host {
   --host-width: 300px;
+  --border-radius: calc(var(--host-width) / 100 * 48);
+  --primary-color: #ff6160;
+  --secondary-color: #ffff80;
   display: grid;
   grid-template-columns: [container-start] 1fr [container-end];
   grid-template-rows: [sun-start] 1fr [horizon-start] 10px [reflection-start] 1fr [reflection-end];
@@ -20,13 +23,13 @@
 #sun {
   grid-column: container-start / container-end;
   grid-row: sun-start / horizon-start;
-  background: #ff6160;
+  background: var(--primary-color);
   background: radial-gradient(
     circle at var(--sun-gradient-x) var(--sun-gradient-y),
-    #ffff80 0%,
-    #ff6160 100%
+    var(--secondary-color) 0%,
+    var(--primary-color) 100%
   );
-  border-radius: 9rem 9rem 0 0;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
   transform-origin: center bottom;
   transform: translateY(50%);
   z-index: 1;
@@ -48,14 +51,18 @@
   content: "";
   display: block;
   height: 0.01rem;
-  box-shadow: 0 8px 10px 0px #ff6160;
+  box-shadow: 0 8px 10px 0px var(primary-color);
 }
 #reflection {
   opacity: 0;
   grid-column: container-start / container-end;
   grid-row: reflection-start / reflection-end;
-  background: #ff6160;
-  background: radial-gradient(circle at bottom, #ffff80 0%, #ff6160 60%);
+  background: var(primary-color);
+  background: radial-gradient(
+    circle at bottom,
+    var(--secondary-color) 0%,
+    var(--primary-color) 60%
+  );
   transform-origin: center top;
   border-radius: 0 0 10rem 10rem;
   filter: blur(2.25rem);

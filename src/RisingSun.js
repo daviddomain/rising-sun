@@ -7,15 +7,33 @@ export class RisingSun extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["width"];
+    return ["width", "primary-color"];
   }
 
   get width() {
     return this.getAttribute("width");
   }
+
   set width(value) {
     this.setAttribute("width", value);
   }
+
+  get primaryColor() {
+    return this.getAttribute("primary-color");
+  }
+
+  set primaryColor(value) {
+    this.setAttribute("primary-color", this.primaryColor);
+  }
+
+  get secondaryColor() {
+    return this.getAttribute("secondary-color");
+  }
+
+  set secondaryColor(value) {
+    this.setAttribute("secondary-color", this.secondaryColor);
+  }
+
   connectedCallback() {
     const customCssProperties = [
       {
@@ -49,6 +67,8 @@ export class RisingSun extends HTMLElement {
 
     console.dir(this.shadowRoot);
     this.style.setProperty("--host-width", this.width);
+    this.style.setProperty("--primary-color", this.primaryColor);
+    this.style.setProperty("--secondary-color", this.secondaryColor);
   }
 }
 
