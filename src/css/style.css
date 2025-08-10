@@ -3,6 +3,7 @@
   --border-radius: calc(var(--host-width) / 100 * 48);
   --primary-color: #ff6160;
   --secondary-color: #ffff80;
+  --background-color: #cabf98;
   display: grid;
   grid-template-columns: [container-start] 1fr [container-end];
   grid-template-rows: [sun-start] 1fr [horizon-start] 10px [reflection-start] 1fr [reflection-end];
@@ -17,7 +18,7 @@
 #background {
   grid-column: container-start / container-end;
   grid-row: horizon-start / reflection-end;
-  background-color: #cabf98;
+  background-color: var(--background-color);
   z-index: 2;
 }
 #sun {
@@ -77,16 +78,19 @@
 #sun {
   animation: riseY 3s ease-out forwards, gradientYMove 1.5s ease-out forwards,
     gradientXMove 2s ease-in forwards;
+  animation-play-state: paused;
 }
 
 #horizon {
   animation: horizonWidth 2.25s ease-out forwards,
     reveal 1.5s ease-in 0.5s forwards;
+  animation-play-state: paused;
 }
 
 #reflection {
   animation: riseY 0.9s ease-out forwards, scaleUp 2.1s ease-out forwards,
     reveal 1.5s ease-in 0.5s forwards;
+  animation-play-state: paused;
 }
 
 @keyframes riseY {

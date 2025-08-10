@@ -1,4 +1,6 @@
 import styles from "./css/style.css?inline";
+import registerCustomCSSProps from "../utilities/registerCustomCSSProps";
+import intersectionObserver from "../utilities/intersectionObserver";
 
 export class RisingSun extends HTMLElement {
   constructor() {
@@ -35,25 +37,15 @@ export class RisingSun extends HTMLElement {
   }
 
   connectedCallback() {
-    const customCssProperties = [
-      {
-        name: "--sun-gradient-y",
-        syntax: "<percentage>",
-        inherits: false,
-        initialValue: "200%",
-      },
-      {
-        name: "--sun-gradient-x",
-        syntax: "<percentage>",
-        inherits: false,
-        initialValue: "5%",
-      },
-    ];
-    if (CSS?.registerProperty) {
-      try {
-        customCssProperties.forEach((prop) => CSS.registerProperty(prop));
-      } catch {}
-    }
+    registerCustomCSSProps();
+
+    const observer = intersectionObserver(this, {
+      rootMargin: "0px",
+      scrollMargin: "0px",
+      threshold: 1.0,
+    });
+
+    observer.observe(this);
 
     this.shadowRoot.innerHTML = /* HTML */ `
       <style>
@@ -65,7 +57,7 @@ export class RisingSun extends HTMLElement {
       <div id="reflection"></div>
     `;
 
-    console.dir(this.shadowRoot);
+    // console.dir(this.shadowRoot);
     this.style.setProperty("--host-width", this.width);
     this.style.setProperty("--primary-color", this.primaryColor);
     this.style.setProperty("--secondary-color", this.secondaryColor);
