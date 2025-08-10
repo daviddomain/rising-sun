@@ -1,53 +1,67 @@
+import styles from "./css/style.css?inline";
+import registerCustomCSSProps from "../utilities/registerCustomCSSProps";
+import intersectionObserver from "../utilities/intersectionObserver";
+
 export class RisingSun extends HTMLElement {
-	constructor() {
-		super();
-		this.attachShadow({ mode: 'open' });
-	}
+  constructor() {
+    super();
+    this.attachShadow({ mode: "open" });
+  }
 
-	connectedCallback() {
-		this.shadowRoot.innerHTML = /* HTML */ `
-			<style>
-				:host {
-					display: grid;
-					place-items: center;
-				}
-				#sun {
-					width: 18rem;
-					height: 9rem;
-					background: #ff6160;
-          background: radial-gradient(circle at top, #ffff80 0%, #ff6160 100%);
-					border-radius: 9rem 9rem 0 0;
-				}
-				#horizon {
-					width: 130%;
+  static get observedAttributes() {
+    return ["width", "primary-color"];
+  }
 
-				}
-				#horizon::before {
-					content: '';
-					display: block;
-          border-top: 0.01rem solid #ffffff;
-				}
-				#horizon::after {
-					content: '';
-					display: block;
-					height: 0.01rem;
-					box-shadow: 0 8px 10px 0px #ff6160;
-				}
-				#reflection {
-					width: 20rem;
-					height: 10rem;
-					background: #ff6160;
-          background: radial-gradient(circle at bottom, #ffff80 0%, #ff6160 60%);
-					border-radius: 0 0 10rem 10rem;
-					filter: blur(2.25rem);
-          zoom: 0.95;
-				}
-			</style>
-			<div id="sun"></div>
-			<div id="horizon"></div>
-			<div id="reflection"></div>
-		`;
-	}
+  get width() {
+    return this.getAttribute("width");
+  }
+
+  set width(value) {
+    this.setAttribute("width", value);
+  }
+
+  get primaryColor() {
+    return this.getAttribute("primary-color");
+  }
+
+  set primaryColor(value) {
+    this.setAttribute("primary-color", this.primaryColor);
+  }
+
+  get secondaryColor() {
+    return this.getAttribute("secondary-color");
+  }
+
+  set secondaryColor(value) {
+    this.setAttribute("secondary-color", this.secondaryColor);
+  }
+
+  connectedCallback() {
+    registerCustomCSSProps();
+
+    const observer = intersectionObserver(this, {
+      rootMargin: "0px",
+      scrollMargin: "0px",
+      threshold: 1.0,
+    });
+
+    observer.observe(this);
+
+    this.shadowRoot.innerHTML = /* HTML */ `
+      <style>
+        ${styles}
+      </style>
+      <div id="sun"></div>
+      <div id="background"></div>
+      <div id="horizon"></div>
+      <div id="reflection"></div>
+    `;
+
+    // console.dir(this.shadowRoot);
+    this.style.setProperty("--host-width", this.width);
+    this.style.setProperty("--primary-color", this.primaryColor);
+    this.style.setProperty("--secondary-color", this.secondaryColor);
+  }
 }
 
-customElements.define('rising-sun', RisingSun);
+customElements.define("rising-sun", RisingSun);

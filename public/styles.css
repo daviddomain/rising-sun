@@ -1,7 +1,11 @@
+html {
+  height: 400vh;
+}
+
 body {
   display: grid;
-  place-items: center;
   font-family: Arial, sans-serif;
-  background-color: #f2f3f7;
-  margin: 0;
+  place-items: center;
+  background-color: #cabf98;
+  height: 400vh;
 }
