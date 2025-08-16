@@ -8,44 +8,32 @@ export class RisingSun extends HTMLElement {
     this.attachShadow({ mode: "open" });
   }
 
-  static get observedAttributes() {
-    return ["width", "primary-color"];
-  }
-
   get width() {
     return this.getAttribute("width");
-  }
-
-  set width(value) {
-    this.setAttribute("width", value);
   }
 
   get primaryColor() {
     return this.getAttribute("primary-color");
   }
 
-  set primaryColor(value) {
-    this.setAttribute("primary-color", this.primaryColor);
-  }
-
   get secondaryColor() {
     return this.getAttribute("secondary-color");
   }
 
-  set secondaryColor(value) {
-    this.setAttribute("secondary-color", this.secondaryColor);
+  get rootMargin() {
+    return this.getAttribute("root-margin");
+  }
+
+  get scrollMargin() {
+    return this.getAttribute("scroll-margin");
+  }
+
+  get threshold() {
+    return this.getAttribute("threshold");
   }
 
   connectedCallback() {
     registerCustomCSSProps();
-
-    const observer = intersectionObserver(this, {
-      rootMargin: "0px",
-      scrollMargin: "0px",
-      threshold: 1.0,
-    });
-
-    observer.observe(this);
 
     this.shadowRoot.innerHTML = /* HTML */ `
       <style>
@@ -57,7 +45,13 @@ export class RisingSun extends HTMLElement {
       <div id="reflection"></div>
     `;
 
-    // console.dir(this.shadowRoot);
+    const observer = intersectionObserver(this.shadowRoot, {
+      root: null,
+      rootMargin: this.rootMargin || "0px",
+      scrollMargin: this.scrollMargin || "0px",
+      threshold: this.threshold || 0.5,
+    });
+
     this.style.setProperty("--host-width", this.width);
     this.style.setProperty("--primary-color", this.primaryColor);
     this.style.setProperty("--secondary-color", this.secondaryColor);

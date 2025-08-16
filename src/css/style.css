@@ -46,7 +46,8 @@
 #horizon::before {
   content: "";
   display: block;
-  border-top: 0.01rem solid #e2e2e2;
+  border-top: 0.01rem solid #f5f5f5;
+  opacity: 0.25;
 }
 #horizon::after {
   content: "";
@@ -76,20 +77,20 @@
 }
 
 #sun {
-  animation: riseY 3s ease-out forwards, gradientYMove 1.5s ease-out forwards,
-    gradientXMove 2s ease-in forwards;
+  animation: riseY 2.7s ease-out forwards, gradientYMove 1.25s ease-out forwards,
+    gradientXMove 1.8s ease-in forwards;
   animation-play-state: paused;
 }
 
 #horizon {
-  animation: horizonWidth 2.25s ease-out forwards,
-    reveal 1.5s ease-in 0.5s forwards;
+  animation: horizonWidth 1.95s ease-out forwards,
+    reveal 1.2s ease-in 0.2s forwards;
   animation-play-state: paused;
 }
 
 #reflection {
-  animation: riseY 0.9s ease-out forwards, scaleUp 2.1s ease-out forwards,
-    reveal 1.5s ease-in 0.5s forwards;
+  animation: riseY 0.6s ease-out forwards, scaleUp 1.8s ease-out forwards,
+    reveal 1.2s ease-in 0.2s forwards;
   animation-play-state: paused;
 }
 
