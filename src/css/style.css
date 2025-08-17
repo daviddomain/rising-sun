@@ -1,9 +1,12 @@
 :host {
-  --host-width: 300px;
+    --host-width: 300px;
   --border-radius: calc(var(--host-width) / 100 * 48);
   --primary-color: #ff6160;
   --secondary-color: #ffff80;
   --background-color: #cabf98;
+}
+
+#container {
   display: grid;
   grid-template-columns: [container-start] 1fr [container-end];
   grid-template-rows: [sun-start] 1fr [horizon-start] 10px [reflection-start] 1fr [reflection-end];
@@ -11,7 +14,7 @@
   width: var(--host-width);
   aspect-ratio: 1;
 }
-:host > div {
+#container > div {
   min-width: 100%;
   min-height: 100%;
 }
