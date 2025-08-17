@@ -1,45 +1,56 @@
-const intersectionObserver = (target, options = {}) => {
-	const sun = target.querySelector('#sun');
-	const horizon = target.querySelector('#horizon');
-	const reflection = target.querySelector('#reflection');
-	const targets = [sun, horizon, reflection];
+class IntersectionObserverUtil {
+  observer;
+  intersectionCallback = () => null
+  outersectionCallback = () => null
+  constructor(target, options = {}) {
+    this.target = target;
+    this.options = options;
+  }
 
-	const callback = (entries) => {
-		for (const entry of entries) {
-			if (entry.isIntersecting) {
-				// Element is (again) intersecting
-				sun.style.animationPlayState = 'running';
-				horizon.style.animationPlayState = 'running';
-				reflection.style.animationPlayState = 'running';
-				console.log('is intersecting');
-			} else if (entry.intersectionRatio === 0) {
-				// Element has left visible area completely
+  observe() {
+    if (Array.isArray(this.target)) {
+      this.target.forEach(el => {
+        this.observer = new IntersectionObserver(this.#callback.bind(this), this.options);
+        this.observer.observe(el);
+      });
+    } else {
+      this.observer = new IntersectionObserver(this.#callback.bind(this), this.options);
+      this.observer.observe(this.target);
+    }
+    return this;
+  }
 
-				console.log('sun is leaving visible area');
-				//sun.style.animationPlayState = 'paused';
+  onIntersect(callback) {
+    this.intersectionCallback = callback;
+    return this;
+  }
 
-				// Optional: determine direction (up/down)
-				// only makes sense if rootBounds exists (when root != null or in the viewport)
-				if (entry.rootBounds) {
-					const leavingTop =
-						entry.boundingClientRect.top < entry.rootBounds.top;
-					const leavingBottom =
-						entry.boundingClientRect.bottom > entry.rootBounds.bottom;
-					// do something with leavingTop / leavingBottom
-					console.log('leavingTop:', leavingTop, 'leavingBottom:', leavingBottom);
+  onOutersect(callback) {
+    this.outersectionCallback = callback;
+    return this;
+  }
+
+  #callback(entries) {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        this.intersectionCallback(entry);
+      } else if (entry.intersectionRatio === 0) {
+        // Element has left visible area completely
+
+        // Optional: determine direction (up/down)
+        if (entry.rootBounds) {
+          const leavingTop =
+            entry.boundingClientRect.top < entry.rootBounds.top;
+          const leavingBottom =
+            entry.boundingClientRect.bottom > entry.rootBounds.bottom;
           if (leavingTop || leavingBottom) {
             // Handle the case where the element is leaving the viewport
-            console.log(document.getAnimations())
+            this.outersectionCallback({entry, leavingTop, leavingBottom});
           }
-				}
-			}
-		}
-	};
+        }
+      }
+    }
+  }
+}
 
-	const observer = new IntersectionObserver(callback, options);
-	for (const targetElement of targets) {
-		observer.observe(targetElement);
-	}
-};
-
-export default intersectionObserver;
+export default IntersectionObserverUtil;
