@@ -32,6 +32,13 @@ export class RisingSun extends HTMLElement {
 		);
 	}
 
+  	get backgroundColor() {
+		return (
+			this.getAttribute('background-color') ||
+			this.#hostStyles.getPropertyValue('--background-color').trim()
+		);
+	}
+
 	connectedCallback() {
 		registerCustomCSSProps();
 
@@ -52,38 +59,44 @@ export class RisingSun extends HTMLElement {
     const sun = this.shadowRoot.querySelector('#sun');
     const horizon = this.shadowRoot.querySelector('#horizon');
     const reflection = this.shadowRoot.querySelector('#reflection');
-		const rootMarginFromViewport =
-			parseInt(this.width) - window.innerHeight / 2;
-
 		const observer = new IntersectionObserverUtil(container, {
 			root: null,
-			rootMargin: this.rootMargin || `${rootMarginFromViewport}px 0px ${rootMarginFromViewport}px 0px`,
-			threshold: [0, 0.8]
+			rootMargin: "0px 0px 0px 0px",
+			threshold: [0]
 		});
+
+
+    const sunAnimation = new Motion(sun)
+    .rise({ duration: 2300, easing: "ease-out", fill: "forwards"})
+    .gradientYMove({duration: 850, ease: "ease-out", fill: "forwards"})
+    .gradientXMove({duration: 1400, ease: "ease-in", fill: "forwards"})
+    .build()
+
+    const horizonAnimation = new Motion(horizon)
+    .growX({ duration: 1750, easing: "ease-out", fill: "forwards" })
+    .reveal({ duration: 1000, easing: "ease-in", fill: "forwards", delay: 200 })
+    .build();
+
+    const reflectionAnimation = new Motion(reflection)
+    .rise({ duration: 600, easing: "ease-out", fill: "forwards" })
+    .scale({ duration: 1950, easing: "ease-out", fill: "forwards" })
+    .growX({ duration: 1950, easing: "ease-out", fill: "forwards" })
+    .reveal({ duration: 1200, easing: "ease-in", fill: "forwards", delay: 200 })
+    .build();
 
     observer.onIntersect((entry) => { 
       console.log('is intersecting', entry);
-        sun.style.animationPlayState = 'running';
-        horizon.style.animationPlayState = 'running';
-        reflection.style.animationPlayState = 'running';
+        sunAnimation.play()
+        horizonAnimation.play();
+        reflectionAnimation.play();
     })
-
-    observer.onOutersect(({entry, leavingTop, leavingBottom}) => {
-      console.log('is leaving', entry);
-      console.log('is leaving top', leavingTop);
-      console.log('is leaving bottom', leavingBottom);
-      sun.style.animationDirection = 'reverse';
-      horizon.style.animationDirection = 'reverse';
-      reflection.style.animationDirection = 'reverse';
-    });
-
+    
     observer.observe()
-
-    console.log(observer)
 
 		this.style.setProperty('--host-width', this.width);
 		this.style.setProperty('--primary-color', this.primaryColor);
 		this.style.setProperty('--secondary-color', this.secondaryColor);
+    this.style.setProperty('--background-color', this.backgroundColor);
 	}
 }
 

@@ -36,7 +36,6 @@ class IntersectionObserverUtil {
         this.intersectionCallback(entry);
       } else if (entry.intersectionRatio === 0) {
         // Element has left visible area completely
-
         // Optional: determine direction (up/down)
         if (entry.rootBounds) {
           const leavingTop =
@@ -45,7 +44,9 @@ class IntersectionObserverUtil {
             entry.boundingClientRect.bottom > entry.rootBounds.bottom;
           if (leavingTop || leavingBottom) {
             // Handle the case where the element is leaving the viewport
-            this.outersectionCallback({entry, leavingTop, leavingBottom});
+            if (entry.time > 1000) {
+              this.outersectionCallback({entry, leavingTop, leavingBottom});
+            }
           }
         }
       }
