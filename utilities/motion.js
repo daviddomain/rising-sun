@@ -34,7 +34,7 @@ class Motion {
 
   // High-level: convenience builders (use individual transform props)
   rise(options = this.#defaultOptions) {
-    return this.add("rise", [{ translate: "0 100%" }, { translate: "0 0" }], options);
+    return this.add("rise", [{ translate: "0 100%" }, { translate: "0 0%" }], options);
   }
   scale(options = this.#defaultOptions) {
     return this.add("scale", [{ scale: "0" }, { scale: "1" }], options);
@@ -43,7 +43,13 @@ class Motion {
     return this.add("reveal", [{ opacity: "0" }, { opacity: "1" }], options);
   }
   growX(options = this.#defaultOptions) {
-    return this.add("growX", [{ width: "0" }, { width: "100%" }], options);
+    return this.add("growX", [{ width: "0" }, { width: "130%" }], options);
+  }
+  gradientYMove(options = this.#defaultOptions) {
+    return this.add("gradientYMove", [{ '--sun-gradient-y': '200%' }, { '--sun-gradient-y': '0%' }], options);
+  }
+  gradientXMove(options = this.#defaultOptions) {
+    return this.add("gradientXMove", [{ '--sun-gradient-x': '5%' }, { '--sun-gradient-x': '50%' }], options);
   }
 
   /**
