@@ -1,5 +1,5 @@
 html {
-  height: 100vh;
+  height: 400vh;
 }
 
 body {
@@ -7,6 +7,5 @@ body {
   font-family: Arial, sans-serif;
   place-items: center;
   background-color: #f2f3f7;
-  height: 100vh;
-  margin: 0;
+  height: 400vh;
 }
