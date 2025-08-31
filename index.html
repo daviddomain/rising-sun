@@ -1,16 +1,86 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/styles.css" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app">
-      <rising-sun primary-color="#ff6160" secondary-color="#ffe3e2" background-color="#f2f3f7"></rising-sun>
-    </div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<link
+			rel="icon"
+			type="image/svg+xml"
+			href="/vite.svg" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="/styles.css" />
+		<title>Rising Sun – Docs & Demo</title>
+	</head>
+
+	<body>
+		<div id="app">
+			<main>
+				<header>
+					<h1>Rising Sun</h1>
+					<p>
+						A tiny web component (custom element) that renders an animated
+						sunrise with horizon and reflection. Colors and width are fully
+						customizable.
+					</p>
+				</header>
+
+				<section aria-labelledby="demo-title">
+					<h2 id="demo-title">Demo</h2>
+					<rising-sun
+						primary-color="#ff6160"
+						secondary-color="yellow"
+						background-color="#222d34"></rising-sun>
+				</section>
+
+				<section aria-labelledby="usage-title">
+					<h2 id="usage-title">Usage</h2>
+					<pre class="codeblock"><code>npm install rising-sun</code></pre>
+					<pre class="codeblock"><code>import 'rising-sun';
+// Now you can use &lt;rising-sun&gt; in HTML</code></pre>
+					<pre class="codeblock"><code>&lt;rising-sun
+  width="400px"
+  primary-color="#ff6160"
+  secondary-color="#ffe3e2"
+  background-color="#222d34"
+&gt;&lt;/rising-sun&gt;</code></pre>
+				</section>
+
+				<section aria-labelledby="props-title">
+					<h2 id="props-title">Attributes</h2>
+					<table>
+						<thead>
+							<tr>
+								<th>Property</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><code>width</code>:</td>
+								<td>Component width, e.g., <code>400px</code></td>
+							</tr>
+							<tr>
+								<td><code>primary-color</code>:</td>
+								<td>Primary color of the sun</td>
+							</tr>
+							<tr>
+								<td><code>secondary-color</code>:</td>
+								<td>Secondary color for gradients/highlights</td>
+							</tr>
+							<tr>
+								<td><code>background-color</code>:</td>
+								<td>Background color of the sky</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+			</main>
+		</div>
+		<script
+			type="module"
+			src="/src/main.js"></script>
+	</body>
 </html>

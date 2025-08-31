@@ -1,11 +1,12 @@
 html {
-  height: 400vh;
+  height: 100vh;
 }
 
 body {
   display: grid;
   font-family: Arial, sans-serif;
   place-items: center;
-  background-color: #f2f3f7;
-  height: 400vh;
+  background-color: #222d34;
+  height: 100vh;
+  margin: 0;
 }
