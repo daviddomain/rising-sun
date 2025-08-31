@@ -93,6 +93,7 @@ export class RisingSun extends HTMLElement {
     
     observer.observe()
 
+
 		this.style.setProperty('--host-width', this.width);
 		this.style.setProperty('--primary-color', this.primaryColor);
 		this.style.setProperty('--secondary-color', this.secondaryColor);

@@ -1,9 +1,10 @@
 :host {
-    --host-width: 300px;
+  --host-width: 300px;
   --border-radius: calc(var(--host-width) / 100 * 48);
   --primary-color: #ff6160;
   --secondary-color: #ffff80;
   --background-color: #cabf98;
+  display: inline-block;
 }
 
 #container {
@@ -14,16 +15,19 @@
   width: var(--host-width);
   aspect-ratio: 1;
 }
+
 #container > div {
   min-width: 100%;
   min-height: 100%;
 }
+
 #background {
   grid-column: container-start / container-end;
   grid-row: horizon-start / reflection-end;
   background-color: var(--background-color);
   z-index: 2;
 }
+
 #sun {
   grid-column: container-start / container-end;
   grid-row: sun-start / horizon-start;
@@ -37,6 +41,7 @@
   transform-origin: center bottom;
   z-index: 1;
 }
+
 #horizon {
   opacity: 0;
   width: 0;
@@ -45,18 +50,21 @@
   grid-row: horizon-start / reflection-start;
   z-index: 2;
 }
+
 #horizon::before {
   content: "";
   display: block;
   border-top: 0.01rem solid #f5f5f5;
   opacity: 0.25;
 }
+
 #horizon::after {
   content: "";
   display: block;
   height: 0.01rem;
   box-shadow: 0 8px 10px 0px var(primary-color);
 }
+
 #reflection {
   opacity: 0;
   grid-column: container-start / container-end;
@@ -73,6 +81,7 @@
   zoom: 0.95;
   z-index: 2;
 }
+
 #reflection::before {
   content: "";
   background: #ffffff;
