@@ -1,52 +1,55 @@
 {
-  "name": "rising-sun",
-  "version": "1.0.0",
-  "description": "A beautiful animated web component that creates a rising sun effect with smooth transitions and customizable colors.",
-  "author": "David Kurek",
-  "license": "MIT",
-  "type": "module",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/daviddomain/rising-sun.git"
-  },
-  "bugs": {
-    "url": "https://github.com/daviddomain/rising-sun/issues"
-  },
-  "homepage": "https://github.com/daviddomain/rising-sun#readme",
-  "scripts": {
-    "dev": "vite",
-    "build:lib": "vite build -m lib",
-    "build:site": "vite build -m site",
-    "build": "vite build",
-    "preview": "vite preview",
-    "prepublishOnly": "npm run build:lib"
-  },
-  "keywords": [
-    "webcomponent",
-    "custom-element",
-    "vanilla-js",
-    "vite",
-    "library"
-  ],
-  "engines": {
-    "node": ">=18"
-  },
-  "main": "./dist/rising-sun.js",
-  "module": "./dist/rising-sun.js",
-  "exports": {
-    ".": {
-      "import": "./dist/rising-sun.js"
-    },
-    "./*": "./dist/*"
-  },
-  "sideEffects": true,
-  "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
-  ],
-  "devDependencies": {
-    "@rollup/plugin-terser": "^0.4.4",
-    "vite": "^6.3.5"
-  }
+	"name": "rising-sun",
+	"version": "1.0.0",
+	"description": "A beautiful animated web component that creates a rising sun effect with smooth transitions and customizable colors.",
+	"author": "David Kurek",
+	"license": "MIT",
+	"type": "module",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/daviddomain/rising-sun.git"
+	},
+	"bugs": {
+		"url": "https://github.com/daviddomain/rising-sun/issues"
+	},
+	"homepage": "https://github.com/daviddomain/rising-sun#readme",
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"dev": "vite",
+		"build:lib": "vite build -m lib",
+		"build:site": "vite build -m site",
+		"build": "vite build",
+		"preview": "vite preview",
+		"prepublishOnly": "npm run build:lib"
+	},
+	"keywords": [
+		"webcomponent",
+		"custom-element",
+		"vanilla-js",
+		"vite",
+		"library"
+	],
+	"engines": {
+		"node": ">=18"
+	},
+	"main": "./dist/rising-sun.js",
+	"module": "./dist/rising-sun.js",
+	"exports": {
+		".": {
+			"import": "./dist/rising-sun.js"
+		},
+		"./*": "./dist/*"
+	},
+	"sideEffects": true,
+	"files": [
+		"dist",
+		"README.md",
+		"LICENSE"
+	],
+	"devDependencies": {
+		"@rollup/plugin-terser": "^0.4.4",
+		"vite": "^6.3.5"
+	}
 }
