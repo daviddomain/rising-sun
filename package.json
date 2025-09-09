@@ -1,6 +1,6 @@
 {
 	"name": "rising-sun",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "A beautiful animated web component that creates a rising sun effect with smooth transitions and customizable colors.",
 	"author": "David Kurek",
 	"license": "MIT",
