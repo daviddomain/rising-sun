@@ -84,15 +84,13 @@ export class RisingSun extends HTMLElement {
     .reveal({ duration: 1200, easing: "ease-in", fill: "forwards", delay: 200 })
     .build();
 
-    observer.onIntersect((entry) => { 
-      console.log('is intersecting', entry);
+    observer.onIntersect(() => { 
         sunAnimation.play()
         horizonAnimation.play();
         reflectionAnimation.play();
     })
     
     observer.observe()
-
 
 		this.style.setProperty('--host-width', this.width);
 		this.style.setProperty('--primary-color', this.primaryColor);

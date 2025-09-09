@@ -1,12 +1,81 @@
 html {
-  height: 100vh;
+	height: 100vh;
 }
 
 body {
-  display: grid;
-  font-family: Arial, sans-serif;
-  place-items: center;
-  background-color: #222d34;
-  height: 100vh;
-  margin: 0;
+	display: grid;
+	font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+		'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+	place-items: center;
+	background-color: #222d34;
+	color: #e7ecef;
+	line-height: 1.5;
+	height: 100vh;
+	margin: 0;
+}
+
+main {
+	max-width: 760px;
+	margin: 3rem auto;
+	text-align: center;
+	padding: 24px;
+}
+
+section {
+	margin: 0 0 0.5rem;
+	padding: 1rem 0;
+}
+
+rising-sun {
+	padding: 3rem 0;
+  margin: 0 auto
+}
+
+h1 {
+	margin: 0 0 1rem;
+}
+
+h2 {
+	margin: 0 0 2rem;
+	font-size: 1.1rem;
+	opacity: 0.95;
+}
+
+p {
+	margin: 0 0 16px;
+	opacity: 0.9;
+}
+
+table {
+	table-layout: auto;
+	width: 100%;
+}
+
+tr {
+	background: rgba(0, 0, 0, 0.25);
+	color: #bbbdbe;
+}
+
+td,
+th {
+	margin: 0 auto 8px;
+	text-align: left;
+	padding: 12px;
+	border-radius: 6px;
+	overflow: auto;
+}
+
+td:first-child {
+	text-align: right;
+	padding-right: 1rem;
+}
+
+.codeblock {
+	text-align: left;
+	margin: 0 auto 8px;
+	background: rgba(0, 0, 0, 0.25);
+	color: #bbbdbe;
+	padding: 12px;
+	border-radius: 6px;
+	overflow: auto;
 }
